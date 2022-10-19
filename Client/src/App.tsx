@@ -4,27 +4,25 @@ import HeaderSelector from "./Components/HeaderSelector";
 import ResultComponent from "./Components/ResultComponent";
 import {io} from "socket.io-client";
 
-const ENDPOINT = 'http://localhost:1040';
-export const socket = io(ENDPOINT);
+const URL = 'http://localhost:1040';
+export const socket = io(URL);
 
 function App() {
-
-    const [value, setValue] = useState<string>('');
+    const [value, setValue] = useState<{ value:string, time:any }>({value:'',time:0});
     useEffect(() => {
-
         socket.on("connect", () => {});
-
-        socket.on("result", (val:string) => {
-            setValue(val);
+        socket.on("result", (value:string) => {
+            const time = Date.now();
+            setValue({value,time});
+            //console.log(`time end: ${time}`)
         });
     }, []);
     return (
         <div className="App">
             <div className="App__Container">
                 <HeaderSelector/>
-                <ResultComponent value={value}/>
+                <ResultComponent value={value.value} time={value.time} />
             </div>
-
         </div>
     );
 }

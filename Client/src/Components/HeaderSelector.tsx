@@ -25,6 +25,8 @@ const splitKeys = [
         value: ';',
     },
 ];
+export let timeStart = 0;
+
 const HeaderSelector = () => {
 
     const [img, setImg] = useState<any>(null);
@@ -61,13 +63,8 @@ const HeaderSelector = () => {
         let join = form.watch().joinKey;
         let register = !form.watch().reg;
         if (str?.length > 0 && key != 'default' && split != 'default' && join != 'default') {
-            const Data = {
-                str,
-                key,
-                split,
-                join,
-                register,
-            }
+            const Data = {str, key, split, join, register,}
+            timeStart = Date.now();
             socket.emit('updateString', Data);
         }
     }
@@ -76,9 +73,7 @@ const HeaderSelector = () => {
         event.preventDefault();
         var fr = new FileReader();
         fr.onload = () => {
-
         }
-
         fr.onloadend = () => {
             if (fr.result) {
                 send(undefined, fr.result)
@@ -157,11 +152,11 @@ const HeaderSelector = () => {
                             </div>
                             <label htmlFor="file-upload" className="custom-file-upload">
                                 {!selectedFile ? <>
-                                    <img src={imgx} alt=""/>
-                                    <div>
-                                        Add .txt File
-                                    </div>
-                                </>:
+                                        <img src={imgx} alt=""/>
+                                        <div>
+                                            Add .txt File
+                                        </div>
+                                    </> :
                                     <div className='easyIn'>
                                         <img src={pie} alt=""/>
                                         <div>
@@ -169,7 +164,6 @@ const HeaderSelector = () => {
                                         </div>
                                     </div>
                                 }
-
 
 
                             </label>
