@@ -28,7 +28,6 @@ const splitKeys = [
 export let timeStart = 0;
 
 const HeaderSelector = () => {
-
     const [img, setImg] = useState<any>(null);
     const [radio, setRad] = useState("");
     const [selectedFile, setSelectedFile] = useState<any>(null);
@@ -46,10 +45,12 @@ const HeaderSelector = () => {
         mode: "onChange"
     });
     const {register} = form;
+
     useEffect(() => {
         setRad(form.watch().radioHeader);
         setSelectedFile(null);
     }, [form.watch().radioHeader])
+
     useEffect(() => {
         send();
     }, [form.watch().sorkKey, form.watch().splitKey, form.watch().joinKey, form.watch().reg])
@@ -88,9 +89,7 @@ const HeaderSelector = () => {
 
     return (
         <div className="Header_Selectors">
-
             <form>
-
                 <div className="toggle">
                     <input {...register("radioHeader")}
                            type="radio" value="0" id="text" checked={radio == '0'} defaultChecked={true}/>
@@ -142,8 +141,6 @@ const HeaderSelector = () => {
                         </div>
                     </>
                 }
-
-
                 {
                     radio == '1' && <>
                         <div className='Align_row'>
@@ -164,20 +161,14 @@ const HeaderSelector = () => {
                                         </div>
                                     </div>
                                 }
-
-
                             </label>
-
                         </div>
                         <div className="low_align al">
                             <button onClick={changeHandler}>Send</button>
                         </div>
                     </>
                 }
-
-
             </form>
-
         </div>
     );
 };

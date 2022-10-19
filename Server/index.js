@@ -19,9 +19,34 @@ const io = socket(server, {
         credentials: true,
     },
 });
-
+const fs = require('fs');
+async function writeFile(content) {
+    try {
+        await fs.appendFile('info.txt', content, err => {});
+    } catch (err) {
+        console.log(err);
+    }
+}
+const composeWriteFile = (socketId,message) => {
+    let timeElapsed = Date.now();
+    let today = new Date(timeElapsed);
+    const stringFile = `${Line}: User with socketId: ${socketId} ${message} at ${today.toUTCString()} \n`
+    writeFile(stringFile);
+    Line++;
+}
+let Line = 0;
 io.on("connection", (socket) => {
     console.log("Connected: " + socket.id);
+    composeWriteFile(socket.id, 'successfully CONNECTED')
+    socket.on('Who', ()=> {
+        console.log(`
+            Автор: Корнієнко Олександр,
+            Група: К-25,
+            Варіант: 15,
+            Назва задачі: Сортування рядків.
+        `)
+        composeWriteFile(socket.id, 'successfully send emit "Who"')
+    })
 
     socket.on('updateString', ({str,key,split, join, register})=>{
         let res = str;
@@ -43,7 +68,11 @@ io.on("connection", (socket) => {
             default:
                 break;
         }
+        composeWriteFile(socket.id, 'successfully send emit "updateString"')
         io.to(socket.id).emit('result', res);
     })
-
+    socket.conn.on("close", (reason) => {
+        console.log(`Disconnected: ${socket.id}`)
+        composeWriteFile(socket.id, 'Disconnected"')
+    });
 })
