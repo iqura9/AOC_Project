@@ -2,6 +2,7 @@
   "name": "knu_aoc",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://iqura9.github.io/AOC_Project",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
