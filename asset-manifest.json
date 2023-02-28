@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.22f93924.css",
-    "main.js": "/static/js/main.824dcbb2.js",
-    "index.html": "/index.html",
-    "main.22f93924.css.map": "/static/css/main.22f93924.css.map",
-    "main.824dcbb2.js.map": "/static/js/main.824dcbb2.js.map"
+    "main.css": "/AOC_Project/static/css/main.22f93924.css",
+    "main.js": "/AOC_Project/static/js/main.824dcbb2.js",
+    "index.html": "/AOC_Project/index.html",
+    "main.22f93924.css.map": "/AOC_Project/static/css/main.22f93924.css.map",
+    "main.824dcbb2.js.map": "/AOC_Project/static/js/main.824dcbb2.js.map"
   },
   "entrypoints": [
     "static/css/main.22f93924.css",
